@@ -25,6 +25,9 @@ public class PessoaFisicaCollectionRepository {
         dep1.setCpf("11111111111").setNome("nome 2").setNascimento(LocalDate.of(2000, 4, 22));
 
         p1.addDependente(dep1);
+
+        save(p1);
+        save(dep1);
     }
 
     public Collection<PessoaFisica> findAll() {
@@ -33,5 +36,11 @@ public class PessoaFisicaCollectionRepository {
 
     public Optional<PessoaFisica> findById(Long id) {
         return pessoas.stream().filter(p->p.getId().equals(id)).findFirst();
+    }
+
+    public static PessoaFisica save(PessoaFisica p) {
+        p.setId(pessoas.size() + 1L);
+        pessoas.add(p);
+        return p;
     }
 }
