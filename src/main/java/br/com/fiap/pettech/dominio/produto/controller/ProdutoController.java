@@ -1,11 +1,8 @@
 package br.com.fiap.pettech.dominio.produto.controller;
 
-import br.com.fiap.pettech.dominio.pessoa.entity.PessoaFisica;
 import br.com.fiap.pettech.dominio.produto.entity.Produto;
-import br.com.fiap.pettech.dominio.produto.repository.ProdutoRepository;
 import br.com.fiap.pettech.dominio.produto.service.ProdutoService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
@@ -41,15 +38,15 @@ public class ProdutoController {
         return ResponseEntity.created(uri).body(produtoSaved);
     }
 
-    @PutMapping("/{id}")
-    public ResponseEntity<Optional<Produto>> update(@RequestBody Produto produto, @PathVariable UUID id) {
-        Optional<Produto> produtoAtualizado = service.update(id, produto);
-        return ResponseEntity.ok(produtoAtualizado);
-    }
-
-    @DeleteMapping("/{id}")
-    public ResponseEntity delete(@PathVariable UUID id) {
-        service.delete(id);
-        return ResponseEntity.noContent().build();
-    }
+//    @PutMapping("/{id}")
+//    public ResponseEntity<Optional<Produto>> update(@RequestBody Produto produto, @PathVariable UUID id) {
+//        Optional<Produto> produtoAtualizado = service.update(id, produto);
+//        return ResponseEntity.ok(produtoAtualizado);
+//    }
+//
+//    @DeleteMapping("/{id}")
+//    public ResponseEntity delete(@PathVariable UUID id) {
+//        service.delete(id);
+//        return ResponseEntity.noContent().build();
+//    }
 }
