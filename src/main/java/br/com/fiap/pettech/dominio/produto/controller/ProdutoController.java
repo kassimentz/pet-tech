@@ -3,6 +3,7 @@ package br.com.fiap.pettech.dominio.produto.controller;
 import br.com.fiap.pettech.dominio.produto.dto.ProdutoDTO;
 import br.com.fiap.pettech.dominio.produto.entity.Produto;
 import br.com.fiap.pettech.dominio.produto.service.ProdutoService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -40,7 +41,7 @@ public class ProdutoController {
     }
 
     @PostMapping
-    public ResponseEntity<ProdutoDTO> save(@RequestBody ProdutoDTO produto) {
+    public ResponseEntity<ProdutoDTO> save(@Valid @RequestBody ProdutoDTO produto) {
         var produtoSaved = service.save(produto);
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(produtoSaved.getId()).toUri();
         return ResponseEntity.created(uri).body(produtoSaved);
