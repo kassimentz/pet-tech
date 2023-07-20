@@ -1,17 +1,25 @@
 package br.com.fiap.pettech.dominio.pessoa.entity;
 
 import java.time.LocalDate;
+import java.util.Objects;
 
-public abstract class Pessoa {
+public class Pessoa {
 
-    Long id;
-    String nome;
-    LocalDate nascimento;
+    private Long id;
+    private String nome;
+    private LocalDate nascimento;
 
-    public Pessoa(Long id, String nome, LocalDate nascimento) {
+    private String cpf;
+
+    private String email;
+
+
+    public Pessoa(Long id, String nome, LocalDate nascimento, String cpf, String email) {
         this.id = id;
         this.nome = nome;
         this.nascimento = nascimento;
+        this.cpf = cpf;
+        this.email = email;
     }
 
     public Pessoa() {
@@ -44,12 +52,31 @@ public abstract class Pessoa {
         return this;
     }
 
+    public String getCpf() {
+        return cpf;
+    }
+
+    public Pessoa setCpf(String cpf) {
+        this.cpf = cpf;
+        return this;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public Pessoa setEmail(String email) {
+        this.email = email;
+        return this;
+    }
+
     @Override
     public String toString() {
         return "Pessoa{" +
-                "id=" + id +
-                ", nome='" + nome + '\'' +
+                "nome='" + nome + '\'' +
                 ", nascimento=" + nascimento +
+                ", cpf='" + cpf + '\'' +
+                ", email='" + email + '\'' +
                 '}';
     }
 
@@ -57,14 +84,12 @@ public abstract class Pessoa {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-
         Pessoa pessoa = (Pessoa) o;
-
-        return id.equals(pessoa.id);
+        return Objects.equals(id, pessoa.id) && Objects.equals(nome, pessoa.nome) && Objects.equals(nascimento, pessoa.nascimento) && Objects.equals(cpf, pessoa.cpf) && Objects.equals(email, pessoa.email);
     }
 
     @Override
     public int hashCode() {
-        return id.hashCode();
+        return Objects.hash(id, nome, nascimento, cpf, email);
     }
 }
