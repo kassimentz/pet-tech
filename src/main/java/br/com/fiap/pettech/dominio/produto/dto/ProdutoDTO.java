@@ -1,10 +1,15 @@
 package br.com.fiap.pettech.dominio.produto.dto;
 
+import br.com.fiap.pettech.dominio.categoria.dto.CategoriaDTO;
+import br.com.fiap.pettech.dominio.categoria.entity.Categoria;
 import br.com.fiap.pettech.dominio.produto.entity.Produto;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Positive;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
 import java.util.UUID;
 
 public class ProdutoDTO {
@@ -14,6 +19,8 @@ public class ProdutoDTO {
     private String nome;
     private String descricao;
     private String urlImagem;
+
+    private List<CategoriaDTO> categorias = new ArrayList<>();
 
     @Positive(message = "O valor do produto deve ser positivo")
     private BigDecimal preco;
@@ -37,6 +44,10 @@ public class ProdutoDTO {
         this.preco = entidade.getPreco();
     }
 
+    public ProdutoDTO(Produto produto, Set<Categoria> categorias) {
+        this(produto);
+        categorias.forEach(categoria -> this.categorias.add(new CategoriaDTO(categoria)));
+    }
     public UUID getId() {
         return id;
     }
@@ -80,5 +91,9 @@ public class ProdutoDTO {
     public ProdutoDTO setPreco(BigDecimal preco) {
         this.preco = preco;
         return this;
+    }
+
+    public List<CategoriaDTO> getCategorias() {
+        return categorias;
     }
 }

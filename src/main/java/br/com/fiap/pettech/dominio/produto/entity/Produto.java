@@ -1,9 +1,12 @@
 package br.com.fiap.pettech.dominio.produto.entity;
 
+import br.com.fiap.pettech.dominio.categoria.entity.Categoria;
 import jakarta.persistence.*;
 
 import java.math.BigDecimal;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 import java.util.UUID;
 
 @Entity
@@ -17,6 +20,10 @@ public class Produto {
     private String descricao;
     private String urlImagem;
     private BigDecimal preco;
+    @ManyToMany
+    @JoinTable(name = "tb_produto_categoria", joinColumns = @JoinColumn(name = "produto_id"), inverseJoinColumns = @JoinColumn(name = "categoria_id"))
+    Set<Categoria> categorias = new HashSet<>();
+
 
     public Produto(String nome, String descricao, String urlImagem, BigDecimal preco) {
         this.id = UUID.randomUUID();
@@ -72,6 +79,10 @@ public class Produto {
     public Produto setPreco(BigDecimal preco) {
         this.preco = preco;
         return this;
+    }
+
+    public Set<Categoria> getCategorias() {
+        return categorias;
     }
 
     @Override
