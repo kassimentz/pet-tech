@@ -9,7 +9,6 @@ import javax.sql.DataSource;
 
 @Configuration
 public class DataSourceConfig {
-
     @Value("${spring.datasource.url}")
     private String url;
     @Value("${spring.datasource.username}")
@@ -20,14 +19,12 @@ public class DataSourceConfig {
     private String driverClassName;
 
     @Bean
-    public DataSource dataSource(){
-
-        DriverManagerDataSource dataSource = new DriverManagerDataSource();
+    public DataSource dataSource() {
+        DriverManagerDataSource  dataSource = new DriverManagerDataSource();
         dataSource.setUrl(url);
         dataSource.setUsername(userName);
         dataSource.setPassword(password);
         dataSource.setDriverClassName(driverClassName);
-
         return dataSource;
     }
 }
